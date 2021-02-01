@@ -63,12 +63,30 @@ class Middle_Game():
         arr_scores = np.array(self.scores)
         index_max = list(np.where(arr_scores == arr_scores.max())[0]) 
         best_moves_individual = [self.next_moves[i] for i in index_max]
-        print(f'best_moves_individual: {best_moves_individual}')
-        print(f'best move Kasparov: {self.best_move}')
+        # print(f'best_moves_individual: {best_moves_individual}')
+        # print(f'best move Kasparov: {self.best_move}')
         return best_moves_individual
-        
+
+    def good_decision_was_taken(self):
+        try:
+            index = self.best_moves_individual.index(self.best_move)
+            return 1
+        except:
+            return 0
+
+
+def get_fitness_individual(games, individual):
+    good_decisions_taken = 0
+
+    for game in games:
+        middle_game = Middle_Game(game, individual)
+        good_decisions_taken += middle_game.good_decision_was_taken()
+
+    return good_decisions_taken
 
 if __name__ == "__main__": 
     games_winner_kasparov = get_games_winner_kasparov()
-    individual = list(np.random.randint(10, size=33))
-    middle_game = Middle_Game(games_winner_kasparov[0], individual)
+    individual = list(np.random.randint(-50, 50, size=33))
+    # middle_game = Middle_Game(games_winner_kasparov[0], individual)
+
+    print(get_fitness_individual(games_winner_kasparov[:10], individual))
