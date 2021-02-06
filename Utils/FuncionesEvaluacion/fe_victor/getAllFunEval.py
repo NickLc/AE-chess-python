@@ -4,7 +4,7 @@ from .victor_utils import obtener_casillas_debiles_blancas, obtener_casillas_deb
 
 # 1
 def obtener_cantidad_casillas_debiles(tablero):
-    juegan_blancas = tablero.turn
+    juegan_blancas = !tablero.turn
     casillas_debiles = obtener_casillas_debiles_blancas(tablero) if juegan_blancas else obtener_casillas_debiles_negras(tablero)
     
     cantidad_casillas_debiles = len(casillas_debiles)
@@ -15,9 +15,9 @@ def obtener_cantidad_casillas_debiles(tablero):
 # 2
 # In[34]:
 def countEnemyKnightsOnWeak(board: chess.Board):
-    turno = board.turn
-    enemyKnightsCasillas = list(board.pieces(chess.KNIGHT, not board.turn))
-    casillasMisPeones = list(board.pieces(chess.PAWN, board.turn))
+    turno = !board.turn
+    enemyKnightsCasillas = list(board.pieces(chess.KNIGHT, not turno))
+    casillasMisPeones = list(board.pieces(chess.PAWN, turno))
     
     knights_enemies_on_weak = 0
     
@@ -54,9 +54,9 @@ def countEnemyKnightsOnWeak(board: chess.Board):
 # 3
 def obtener_cantidad_peones_centrales(tablero):
     cantidad_peones_en_el_centro = 0
-    color_turno = tablero.turn
+    color_turno = !tablero.turn
     casillas_centrales = [27,28,35,36]
-    casillas_peones = list(tablero.pieces(chess.PAWN, tablero.turn))
+    casillas_peones = list(tablero.pieces(chess.PAWN, color_turno))
     
     for casilla in casillas_centrales:
         if casilla in casillas_peones:
@@ -66,11 +66,11 @@ def obtener_cantidad_peones_centrales(tablero):
 # 4
 def get_pawns_around_king(tablero):
     cantida_peones_alrededor_del_rey = 0
-    turno = tablero.turn
+    turno = !tablero.turn
     casilla_rey = tablero.king(turno)
     casillas_adyacentes_al_rey = casillas_adyacentes(casilla_rey)
     
-    casillas_peones = list(tablero.pieces(chess.PAWN, tablero.turn))
+    casillas_peones = list(tablero.pieces(chess.PAWN, turno))
     
     for casilla in casillas_adyacentes_al_rey:
         if casilla in casillas_peones:
@@ -81,7 +81,7 @@ def get_pawns_around_king(tablero):
 # 8
 def get_bishop_mob(tablero):
     movilidad_alfiles_acumulada = 0
-    turno = tablero.turn    
+    turno = !tablero.turn    
     casillas_alfiles = list(tablero.pieces(chess.BISHOP, turno))
     
     for casilla_alfil in casillas_alfiles:
@@ -93,8 +93,8 @@ def get_bishop_mob(tablero):
 # 9
 def cantidad_alfiles_in_big_diagonal(tablero):
     cantidad_alfiles_big_diagonal = 0
-    color_turno = tablero.turn
-    casillas_alfiles = list(tablero.pieces(chess.BISHOP, tablero.turn))
+    color_turno = !tablero.turn
+    casillas_alfiles = list(tablero.pieces(chess.BISHOP, color_turno))
     
     for casilla in casillas_alfiles:
         fila = chess.square_rank(casilla)
@@ -110,9 +110,9 @@ def cantidad_alfiles_in_big_diagonal(tablero):
 
 # 10
 def got_bishop_pair(tablero):
-    color_turno = tablero.turn
+    color_turno = !tablero.turn
     
-    casillas_alfiles = list(tablero.pieces(chess.BISHOP, tablero.turn))
+    casillas_alfiles = list(tablero.pieces(chess.BISHOP, color_turno))
     
     if len(casillas_alfiles) >= 2:
         return 1
@@ -122,9 +122,9 @@ def got_bishop_pair(tablero):
 # 11
 def get_knightMob(board: chess.Board):
     movilidad_caballos_acumulada = 0
-    turno = turno = board.turn
+    turno = !board.turn
     
-    casillas_caballos = list(board.pieces(chess.KNIGHT, board.turn))
+    casillas_caballos = list(board.pieces(chess.KNIGHT, turno))
     
     for casilla_caballo in casillas_caballos:
         movilidad_caballos_acumulada += obtener_movilidad_caballo(casilla_caballo, board)
@@ -135,9 +135,9 @@ def get_knightMob(board: chess.Board):
 # 12
 def caballos_apoyados_por_peones(tablero):
     cantidad_caballos_apoyados_por_peones = 0
-    juegan_blancas = tablero.turn
-    casillas_caballos = list(tablero.pieces(chess.KNIGHT, tablero.turn))
-    casillas_peones = list(tablero.pieces(chess.PAWN, tablero.turn))
+    juegan_blancas = !tablero.turn
+    casillas_caballos = list(tablero.pieces(chess.KNIGHT, juegan_blancas))
+    casillas_peones = list(tablero.pieces(chess.PAWN, juegan_blancas))
     
     if juegan_blancas:        
         for casilla_caballo in casillas_caballos:
