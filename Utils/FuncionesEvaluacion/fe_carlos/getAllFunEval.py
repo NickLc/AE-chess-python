@@ -11,7 +11,7 @@ import chess
 
 #25
 def Rookopenfile(board):  
-  posiciones_de_torres = list(board.pieces(chess.ROOK, board.turn))
+  posiciones_de_torres = list(board.pieces(chess.ROOK, not board.turn))
   torres_libres = 0
   for torre in posiciones_de_torres:
     obstaculo = False
@@ -27,7 +27,7 @@ def Rookopenfile(board):
 
 #26
 def Rooksemiopenfile(board):
-  posiciones_de_torres = list(board.pieces(chess.ROOK, board.turn))
+  posiciones_de_torres = list(board.pieces(chess.ROOK, not board.turn))
   torres_libres = 0
   for torre in posiciones_de_torres:
     obstaculo = False
@@ -35,7 +35,7 @@ def Rooksemiopenfile(board):
     for i in range(8): 
       posicion_tablero = columna_torre + (i * 8)
       if board.piece_at(posicion_tablero) is not None and posicion_tablero != torre:
-        if board.turn: #si es turno de blancas
+        if not board.turn: #si es turno de blancas
           if board.piece_at(posicion_tablero).symbol() == 'P':
             obstaculo = True
         else: #si es turno de negras
@@ -47,7 +47,7 @@ def Rooksemiopenfile(board):
 
 #27
 def Rookclosedfile(board):
-  posiciones_de_torres = list(board.pieces(chess.ROOK, board.turn))
+  posiciones_de_torres = list(board.pieces(chess.ROOK, not board.turn))
   torres_bloqueadas = 0
   for torre in posiciones_de_torres:
     obstaculo = 0
@@ -65,9 +65,9 @@ def Rookclosedfile(board):
 
 #28
 def Rookonseventh(board):
-  posiciones_de_torres = list(board.pieces(chess.ROOK, board.turn))
+  posiciones_de_torres = list(board.pieces(chess.ROOK, not board.turn))
   for torre in posiciones_de_torres:
-    if board.turn:
+    if not board.turn:
       if 47 < torre < 56:
         return 1
     else: 
@@ -77,7 +77,7 @@ def Rookonseventh(board):
 
 #29
 def Rookmob(board):
-  posiciones_de_torres = list(board.pieces(chess.ROOK, board.turn))
+  posiciones_de_torres = list(board.pieces(chess.ROOK, not board.turn))
   movimientos = 0
   for torre in posiciones_de_torres:
     #print("torre posicion: "+ str(torre))
@@ -124,7 +124,7 @@ def Rookmob(board):
 
 #30
 def Rookcon(board):
-  posiciones_de_torres = list(board.pieces(chess.ROOK, board.turn))
+  posiciones_de_torres = list(board.pieces(chess.ROOK, not board.turn))
   if len(posiciones_de_torres) == 2:
     if posiciones_de_torres[0]%8 == posiciones_de_torres[1]%8: #columna igual
       diferencia_de_filas = abs(posiciones_de_torres[0]//8 - posiciones_de_torres[1]//8)-1
@@ -144,7 +144,7 @@ def Rookcon(board):
 
 #31
 def Queenmob(board):
-  posiciones_de_torres = list(board.pieces(chess.QUEEN, board.turn))
+  posiciones_de_torres = list(board.pieces(chess.QUEEN, not board.turn))
   movimientos = 0
   for torre in posiciones_de_torres:
     #print("reina posicion: "+ str(torre))
@@ -223,23 +223,23 @@ def Queenmob(board):
 
 #32
 def Pawn_value(board):
-  return len(list(board.pieces(chess.PAWN, board.turn)))
+  return len(list(board.pieces(chess.PAWN, not board.turn)))
 
 #33
 def Knight_value(board):
-  return len(list(board.pieces(chess.KNIGHT, board.turn)))
+  return len(list(board.pieces(chess.KNIGHT, not board.turn)))
 
 #34
 def Bishop_value(board):
-  return len(list(board.pieces(chess.BISHOP, board.turn)))
+  return len(list(board.pieces(chess.BISHOP, not board.turn)))
 
 #35
 def Queen_value(board):
-  return len(list(board.pieces(chess.QUEEN, board.turn)))
+  return len(list(board.pieces(chess.QUEEN, not board.turn)))
 
 #36
 def Rook_value(board):
-  return len(list(board.pieces(chess.ROOK, board.turn)))
+  return len(list(board.pieces(chess.ROOK, not board.turn)))
 
 def get_all_fun_eval_c(board):
   lista_de_parametros = []
@@ -269,4 +269,3 @@ def get_all_fun_eval_c(board):
   lista_de_parametros.append(Rook_value(board))
 
   return lista_de_parametros
-
