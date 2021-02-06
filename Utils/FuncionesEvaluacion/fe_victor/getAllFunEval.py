@@ -4,7 +4,7 @@ from .victor_utils import obtener_casillas_debiles_blancas, obtener_casillas_deb
 
 # 1
 def obtener_cantidad_casillas_debiles(tablero):
-    juegan_blancas = !tablero.turn
+    juegan_blancas = not tablero.turn
     casillas_debiles = obtener_casillas_debiles_blancas(tablero) if juegan_blancas else obtener_casillas_debiles_negras(tablero)
     
     cantidad_casillas_debiles = len(casillas_debiles)
@@ -15,7 +15,7 @@ def obtener_cantidad_casillas_debiles(tablero):
 # 2
 # In[34]:
 def countEnemyKnightsOnWeak(board: chess.Board):
-    turno = !board.turn
+    turno = not board.turn
     enemyKnightsCasillas = list(board.pieces(chess.KNIGHT, not turno))
     casillasMisPeones = list(board.pieces(chess.PAWN, turno))
     
@@ -54,7 +54,7 @@ def countEnemyKnightsOnWeak(board: chess.Board):
 # 3
 def obtener_cantidad_peones_centrales(tablero):
     cantidad_peones_en_el_centro = 0
-    color_turno = !tablero.turn
+    color_turno = not tablero.turn
     casillas_centrales = [27,28,35,36]
     casillas_peones = list(tablero.pieces(chess.PAWN, color_turno))
     
@@ -66,7 +66,7 @@ def obtener_cantidad_peones_centrales(tablero):
 # 4
 def get_pawns_around_king(tablero):
     cantida_peones_alrededor_del_rey = 0
-    turno = !tablero.turn
+    turno = not tablero.turn
     casilla_rey = tablero.king(turno)
     casillas_adyacentes_al_rey = casillas_adyacentes(casilla_rey)
     
@@ -81,7 +81,7 @@ def get_pawns_around_king(tablero):
 # 8
 def get_bishop_mob(tablero):
     movilidad_alfiles_acumulada = 0
-    turno = !tablero.turn    
+    turno = not tablero.turn    
     casillas_alfiles = list(tablero.pieces(chess.BISHOP, turno))
     
     for casilla_alfil in casillas_alfiles:
@@ -93,7 +93,7 @@ def get_bishop_mob(tablero):
 # 9
 def cantidad_alfiles_in_big_diagonal(tablero):
     cantidad_alfiles_big_diagonal = 0
-    color_turno = !tablero.turn
+    color_turno = not tablero.turn
     casillas_alfiles = list(tablero.pieces(chess.BISHOP, color_turno))
     
     for casilla in casillas_alfiles:
@@ -110,7 +110,7 @@ def cantidad_alfiles_in_big_diagonal(tablero):
 
 # 10
 def got_bishop_pair(tablero):
-    color_turno = !tablero.turn
+    color_turno = not tablero.turn
     
     casillas_alfiles = list(tablero.pieces(chess.BISHOP, color_turno))
     
@@ -122,7 +122,7 @@ def got_bishop_pair(tablero):
 # 11
 def get_knightMob(board: chess.Board):
     movilidad_caballos_acumulada = 0
-    turno = !board.turn
+    turno = not board.turn
     
     casillas_caballos = list(board.pieces(chess.KNIGHT, turno))
     
@@ -135,7 +135,7 @@ def get_knightMob(board: chess.Board):
 # 12
 def caballos_apoyados_por_peones(tablero):
     cantidad_caballos_apoyados_por_peones = 0
-    juegan_blancas = !tablero.turn
+    juegan_blancas = not tablero.turn
     casillas_caballos = list(tablero.pieces(chess.KNIGHT, juegan_blancas))
     casillas_peones = list(tablero.pieces(chess.PAWN, juegan_blancas))
     
