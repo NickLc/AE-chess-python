@@ -38,8 +38,8 @@ def get_df_fun_eval_partida(df_fun_eval, id_partida):
     return df_fun_eval.query('id_partida == @id_partida')
 
 if __name__ == "__main__": 
-    df_fun_eval = pd.read_csv('Utils/Data/jugadas_fun_eval.csv', ',', index_col=0)
-    df_games = pd.read_csv('Utils/Data/resumen_jugadas.csv', ',', index_col=0)
+    df_fun_eval = pd.read_csv('../Utils/Data/jugadas_fun_eval.csv', ',', index_col=0)
+    df_games = pd.read_csv('../Utils/Data/resumen_jugadas.csv', ',', index_col=0)
     id_partida = 4
     
     best_move = get_best_move(df_games, id_partida)
