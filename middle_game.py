@@ -18,12 +18,19 @@ def get_fitness_individual(df_fun_eval_turn, best_move, individual):
     next_moves = df_fun_eval_turn.iloc[:,3].values
     best_moves_individual = next_moves[index_max]
 
+    if best_move in best_moves_individual:
+        return 1
+
+    else:
+        return 0
+    """
     try:
         index = best_moves_individual.index(best_move)
         return 1
     except:
         return 0
-    
+    """ 
+       
 def get_best_move(df_games, id_partida):
     return df_games.iloc[id_partida, 1]
 
